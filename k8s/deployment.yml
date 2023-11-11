@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pimonitor
+  labels:
+    app: pimonitor
+    namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pimonitor
+  template:
+    metadata:
+      labels:
+        app: pimonitor
+    spec:
+      containers:
+      - name: pimonitor
+        image: <your-docker-registry>/pimonitor:latest
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: cloudwatch
+              key: aws_access_key_id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudwatch
+              key: aws_secret_access_key
