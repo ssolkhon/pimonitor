@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pimonitor
-        image: <your-docker-registry>/pimonitor:latest
+        image: public.ecr.aws/ssolkhon/pimonitor:latest
         env:
         - name: AWS_ACCESS_KEY_ID
           valueFrom:

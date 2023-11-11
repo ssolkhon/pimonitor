@@ -4,6 +4,12 @@ A simple python application to send heartbeat metrics to AWS CloudWatch.
 
 ## Docker Build
 
+When a commit is merged into the master branch a new docker image is built and
+pushed to the docker registry. This can be found at:
+`public.ecr.aws/ssolkhon/pimonitor:latest`
+
+If you'd like to build the image yourself, follow the steps below:
+
 - To build the docker image run:
 
 ```bash
@@ -23,7 +29,7 @@ $ docker push <your-docker-registry>/pimonitor:latest
 - Create the namespace
 
 ```bash
-$ kubectl create -f k8s/namespace.yml
+$ kubectl create namespace monitoring
 ```
 
 - Create the secret
@@ -41,3 +47,5 @@ $ kubectl create secret generic cloudwatch \
 $ kubectl apply -f k8s/deployment.yml \
 --namespace monitoring
 ```
+
+The supplied deployment file is also compatible with ArgoCD.
