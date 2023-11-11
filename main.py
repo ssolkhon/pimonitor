@@ -61,4 +61,5 @@ if __name__ == '__main__':
     client = get_aws_client(aws_access_key_id, aws_secret_access_key,
                             'eu-west-2', 'cloudwatch')
 
+    # Start application
     run(client)
