@@ -2,6 +2,8 @@
 
 A simple python application to send heartbeat metrics to AWS CloudWatch.
 
+![Docker Container Actions Status](https://github.com/ssolkhon/pimonitor/actions/workflows/publish-docker-container.yml/badge.svg)
+
 ## Docker Build
 
 When a commit is merged into the master branch a new docker image is built and
