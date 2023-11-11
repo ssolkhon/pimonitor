@@ -1,6 +1,7 @@
 # pimonitor
 
-A simple python application to send heartbeat metrics to AWS CloudWatch.
+A simple python application to send heartbeat metrics for a Raspberry Pi to
+AWS CloudWatch.
 
 ![Docker Container Actions Status](https://github.com/ssolkhon/pimonitor/actions/workflows/publish-docker-container.yml/badge.svg)
 
