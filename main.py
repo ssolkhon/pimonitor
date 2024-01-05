@@ -22,21 +22,37 @@ def get_aws_client(access_key_id, secret_access_key, region, service):
 
 def send_cloudwatch_metric(client, namespace, metric_name, value, dimensions):
     logging.debug("Sending metric to CloudWatch")
-    response = client.put_metric_data(
-        Namespace=namespace,
-        MetricData=[
-            {
-                'MetricName': metric_name,
-                'Value': value,
-                'Dimensions': dimensions
-            },
-        ]
-    )
-    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
-        logging.info("Successfully sent metric to CloudWatch")
-        return True
-    else:
-        logging.error("Failed to send metric to CloudWatch")
+    try:
+      response = client.put_metric_data(
+          Namespace=namespace,
+          MetricData=[
+              {
+                  'MetricName': metric_name,
+                  'Value': value,
+                  'Dimensions': dimensions
+              },
+          ]
+      )
+      if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+          logging.info("Successfully sent metric to CloudWatch")
+          return True
+      else:
+          logging.error("Failed to send metric to CloudWatch")
+          return False
+    
+    except botocore.exceptions.ClientError as e:
+        msg = f"Client Error: {e}"
+        logging.error(msg)
+        return False
+    
+    except botocore.exceptions.EndpointConnectionError as e:
+        msg = f"AWS Connection Error: {e}"
+        logging.error(msg)
+        return False
+    
+    except botocore.exceptions.NoCredentialsError as e:
+        msg = f"AWS credentials not found: {e}"
+        logging.error(msg)
         return False
 
 
